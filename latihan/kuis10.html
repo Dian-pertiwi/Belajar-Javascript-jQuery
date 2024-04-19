@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Belajar AJAX | Gamelab Indonesia</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js">
+
+        //memmberikan proteksi apabila kolom input kosong
+      if($('input').val().length == 0){
+          return swal('','Mohon masukkan nama negara terlebih dahalu','warning');
+      }
+    </script>
+    <style>
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: #f1f5f8;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      input {
+        border: 2px solid #c9d8e4;
+      }
+
+      button {
+        background-color: #ff7f11;
+        border: 0;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      input,
+      button {
+        border-radius: 5px;
+        font-size: 1.3rem;
+        padding: 8px;
+      }
+
+      .card-statistik {
+        display: none;
+
+        background-color: #fff;
+        border-radius: 5px;
+        margin: 30px 0;
+        padding: 15px;
+      }
+
+      .font-light {
+        font-weight: 300;
+      }
+
+      .font-medium {
+        font-weight: 400;
+      }
+
+      .font-bold {
+        font-weight: 600;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        margin: 10px 0;
+        margin-top: 0;
+      }
+
+      p {
+        margin-top: 0;
+      }
+
+      .mb-3 {
+        margin-bottom: 1.2rem;
+      }
+
+      .statistik-title {
+        color: #14527b;
+        font-size: 2rem;
+        margin-bottom: 0;
+      }
+
+      .statistik-subtitle {
+        color: #98afc3;
+        font-size: 1.15rem;
+        margin-bottom: 25px;
+      }
+
+      .data-title {
+        color: #98afc3;
+        font-size: 1rem;
+        margin-bottom: 5px;
+      }
+
+      .data-value {
+        color: #14527b;
+        font-size: 1.2rem;
+        margin-bottom: 0px;
+      }
+
+      .flex-container {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .flex-container > div {
+        flex: 0 0 50%;
+        width: 50%;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Masukkan nama negara" />
+      <button type="button">Cek Statistik</button>
+
+      <div class="card-statistik">
+        <h4 class="font-bold statistik-title">Statistik Covid</h4>
+        <h6 class="font-medium statistik-subtitle">
+          Negara :
+          <span class="nama-negara">Indonesia</span>
+        </h6>
+
+        <div class="flex-container">
+          <div class="mb-3">
+            <p class="data-title">Kasus Aktif</p>
+            <p class="data-value active-case"></p>
+          </div>
+
+          <div class="mb-3">
+            <p class="data-title">Kasus Kritis</p>
+            <p class="data-value critical-case"></p>
+          </div>
+
+          <div>
+            <p class="data-title">Kasus Baru</p>
+            <p class="data-value new-case"></p>
+          </div>
+
+          <div>
+            <p class="data-title">Sembuh</p>
+            <p class="data-value recovered"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      //memformat angka menjadi ribuan dan angka null
+      function formatNumber(number) {
+        if (isNaN(number) || number == null) {
+          return 0;
+        } else {
+          return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+      }
+
+      $("button").click(function () {
+        if ($("input").val().length == 0) {
+          return swal("", "Mohon masukkan nama negara terlebih dahulu");
+        }
+        var Title = $("input").val().toLowerCase();
+
+        $.ajax({
+          method: "GET",
+          url: "https://movie-database-alternative.p.rapidapi.com/",
+          params: {
+            s: "Avengers Endgame",
+            r: "json",
+            page: "1",
+          },
+          headers: {
+            "X-RapidAPI-Key":
+              "740aed56d2mshd7f66dfe7d3b24ap1c168ajsn2aad6aa74e6b",
+            "X-RapidAPI-Host": "movie-database-alternative.p.rapidapi.com",
+          },
+
+          //callback sukses
+          success: function (res) {
+            //memberikan proteksi apabila data tidak ditemukan akibat kesalahan penulisan
+            if (res.response.length == 0) {
+              return swal(
+                "Data tidak ditemukan",
+                "pastikan nama negara yang ditulis benar",
+                "warning"
+              );
+            }
+            var data = res.response[0].cases;
+            console.log(data);
+
+            //menutup pop-up sweetAlert tadi
+            swal.close();
+
+            //Mengaupdate informasi yang ditampilkan pada DOM
+            $(".active-case").text(formatNumber(data.active));
+            $(".critical-case").text(formatNumber(data.critical));
+            $(".new-case").text(formatNumber(data.new));
+            $(".recovered").text(formatNumber(data.recovered));
+
+            // Menuliskan nama negara dengan huruf kafital
+            var NewTitle = Title.charAt(0).toUpperCase() + Title.slice(1);
+
+            $(".nama-negara").text(NewTitle);
+            $(".card-statistik").show();
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

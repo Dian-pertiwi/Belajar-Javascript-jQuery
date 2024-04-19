@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Article Viewer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .login-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .login-button {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+      }
+      .login button {
+        margin-bottom: 10px;
+      }
+      .login-button:hover {
+        background-color: #0056b3;
+      }
+      .article {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      .article img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      h2 {
+        text-align: left;
+        color: #333;
+      }
+
+      table {
+        margin-top: 100px;
+        width: 100%;
+        max-width: 400px;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        margin-top: 20px;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f9f9f9;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <input type="text" class="article" placeholder="Search for articles" />
+      <button class="login-button">Search</button>
+    </div>
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- JavaScript file containing AJAX function -->
+    <script src="tgs.js"></script>
+
+    <h2>Nama-Nama Negara di Dunia</h2>
+    <table id="countryList">
+      <thead>
+        <tr>
+          <th>Nama Negara</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      $("button").click(function () {
+        var initial = $(".article").val(); // Mendapatkan inisial dari input teks
+
+        $.ajax({
+          // url: "https://newsapi.org/v2/everything?q=Apple&from=2024-03-15&sortBy=popularity&apiKey=990aace882894059ab759bcdcac43ec0",
+          // url: "https://covid-193.p.rapidapi.com/statistics",
+          url: "https://restcountries.com/v3.1/all",
+          type: "GET",
+          success: function (res) {
+            console.log(res);
+            var countryNames = [];
+            res.forEach(function (country) {
+              // Memeriksa apakah inisial negara dimulai dengan inisial yang dimasukkan pengguna
+              if (
+                country.name.common.charAt(0).toLowerCase() ===
+                initial.toLowerCase()
+              ) {
+                countryNames.push(country.name.common); // Menambahkan nama negara ke dalam daftar nama negara
+              }
+            });
+            // Menampilkan daftar nama negara ke dalam div dengan id "countryList"
+            $("#countryList").html("<li>" + countryNames.join(",") + "</li>");
+            // $("#countryList").html.append(
+            //   "<tr><td>" + countryNames.join + "</td></tr>"
+            // );
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

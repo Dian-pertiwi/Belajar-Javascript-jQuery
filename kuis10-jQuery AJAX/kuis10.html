@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>kuis 10</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        height: 100vh;
+      }
+
+      h2 {
+        text-align: left;
+        color: #333;
+      }
+
+      table {
+        margin-top: 100px;
+        width: 100%;
+        max-width: 400px;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        margin-top: 20px;
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f9f9f9;
+      }
+
+      tr:hover {
+        background-color: #f9f9f9;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Nama-Nama Negara di Dunia</h2>
+    <table id="country-list">
+      <thead>
+        <tr>
+          <th>Nama Negara</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="kuis10.js"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tugas Akhir DIAN PERTIWI</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .login-container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+        margin-top: 20px;
+      }
+      .login-button {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 30px;
+      }
+      .login button {
+        margin-bottom: 10px;
+        justify-content: center;
+        align-items: center;
+      }
+      .login-button:hover {
+        background-color: #0056b3;
+      }
+      .article {
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+      .article img {
+        max-width: 100%;
+        height: auto;
+      }
+      .paragraph {
+        color: #00f836;
+        padding: 30px;
+        font-weight: bold;
+      }
+      table {
+        margin-top: 20px;
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        text-align: center;
+        color: #333;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+        text-align: left;
+      }
+      th {
+        background-color: #f9f9f9;
+      }
+      tr:hover {
+        background-color: #f9f9f9;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Nama-Nama Negara di Dunia</h2>
+    <p class="paragraph">Masukkan inisial negara yang ingin anda cari</p>
+    <div class="login-container">
+      <input
+        id="myInput"
+        class="article"
+        placeholder="Masukkan inisial negara" />
+      <button class="login-button">Search</button>
+    </div>
+
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+
+    <table id="countryList"></table>
+  </body>
+</html>

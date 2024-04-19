@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quis 9</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 50;
+      }
+      .login-button {
+        padding: 10px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-bottom: 20px;
+      }
+      .login button {
+        margin-bottom: 10px;
+      }
+      .login-button:hover {
+        background-color: #0056b3;
+      }
+      .highlight {
+        color: rgb(252, 0, 117);
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2 id="judul">Manipulasi DOM dengan jQuery</h2>
+    <p id="paragraf">Ini adalah sebuah paragraf.</p>
+    <button id="ubah" class="login-button">Ubah Paragraf</button>
+    <div id="container">
+      <h2>Tambah Item</h2>
+      <ul id="daftar">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+      <button id="tambah" class="login-button">Tambah Item</button>
+    </div>
+    <div id="container">
+      <h2>Hapus Item</h2>
+      <ul id="daftar">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+      </ul>
+      <button id="hapus" class="login-button">Hapus Item Pertama</button>
+    </div>
+  </body>
+</html>

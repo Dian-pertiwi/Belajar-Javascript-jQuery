@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=script, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  $.ajax({
+      //   url: "https://covid-193.p.rapidapi.com/statistics",
+      //   method: "GET",
+      //   data: {
+      //     country: countryName,
+      //   },
+      //   headers: {
+      //     "X-RapidAPI-Host": "covid-193.p.rapidapi.com",
+      //     "X-RapidAPI-Key":
+      //       "740aed56d2mshd7f66dfe7d3b24ap1c168ajsn2aad6aa74e6b",
+      //   },
+
+      if ($("input").val().length == 0) {
+        return swal("", "Mohon masukkan nama negara terlebih dahulu");
+      }
+      var countryName = $("input").val().toLowerCase();
+
+      $.ajax({
+        url: "https://covid-193.p.rapidapi.com/statistics",
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Host": "covid-193.p.rapidapi.com",
+          "X-RapidAPI-Key":
+            "740aed56d2mshd7f66dfe7d3b24ap1c168ajsn2aad6aa74e6b",
+        },
+        // success: function (response) {
+        //   console.log(response);
+        //   // Lakukan sesuatu dengan respons dari API
+        // },
+        // error: function (xhr, status, error) {
+        //   console.error(status, error);
+        //   // Handle kesalahan jika permintaan gagal
+        // },
+
+        //callback sukses
+        success: function (res) {
+          //memberikan proteksi apabila data tidak ditemukan akibat kesalahan penulisan
+          if (res.response.length == 0) {
+            return swal(
+              "Data tidak ditemukan",
+              "pastikan nama negara yang ditulis benar",
+              "warning"
+            );
+          }
+          var data = res.response[0].cases;
+          console.log(data);
+        },
+
+        
+      });
+    </script>
+  </body>
+</html>

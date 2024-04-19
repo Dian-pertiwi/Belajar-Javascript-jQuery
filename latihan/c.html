@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contoh jQuery AJAX</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#btnGetData").click(function () {
+          $.ajax({
+            url: "data.php", // Replace "data.php" with your actual server-side script URL
+            type: "GET",
+            success: function (response) {
+              $("#dataContainer").html(response);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              console.error("Error:", textStatus, errorThrown);
+              $("#dataContainer").html("Error loading data");
+            },
+          });
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <button id="btnGetData">Get Data</button>
+    <div id="dataContainer"></div>
+  </body>
+</html>
